@@ -19,8 +19,6 @@ namespace WindowsFormsApp3
 
         private void Form4_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dB1DataSet.Categories' table. You can move, or remove it, as needed.
-            this.categoriesTableAdapter.Fill(this.dB1DataSet.Categories);
             checkBox3.Checked = true;
             checkBox3.BackColor = Color.Gray;
             checkBox3.Enabled = false;

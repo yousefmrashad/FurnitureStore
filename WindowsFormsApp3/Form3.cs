@@ -18,8 +18,6 @@ namespace WindowsFormsApp3
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dB1DataSet.Products' table. You can move, or remove it, as needed.
-            this.productsTableAdapter.Fill(this.dB1DataSet.Products);
             checkBox2.Checked = true;
             checkBox2.BackColor = Color.Gray;
             checkBox2.Enabled = false;    

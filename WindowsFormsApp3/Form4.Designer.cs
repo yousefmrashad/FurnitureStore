@@ -31,7 +31,6 @@ namespace WindowsFormsApp3
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -48,15 +47,7 @@ namespace WindowsFormsApp3
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dB1DataSet = new WindowsFormsApp3.DB1DataSet();
-            this.categoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.categoriesTableAdapter = new WindowsFormsApp3.DB1DataSetTableAdapters.CategoriesTableAdapter();
-            this.catIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catDescDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox3
@@ -154,13 +145,7 @@ namespace WindowsFormsApp3
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.catIDDataGridViewTextBoxColumn,
-            this.catNameDataGridViewTextBoxColumn,
-            this.catDescDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.categoriesBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(389, 152);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(399, 365);
@@ -230,38 +215,6 @@ namespace WindowsFormsApp3
             this.textBox1.Size = new System.Drawing.Size(176, 26);
             this.textBox1.TabIndex = 54;
             // 
-            // dB1DataSet
-            // 
-            this.dB1DataSet.DataSetName = "DB1DataSet";
-            this.dB1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // categoriesBindingSource
-            // 
-            this.categoriesBindingSource.DataMember = "Categories";
-            this.categoriesBindingSource.DataSource = this.dB1DataSet;
-            // 
-            // categoriesTableAdapter
-            // 
-            this.categoriesTableAdapter.ClearBeforeFill = true;
-            // 
-            // catIDDataGridViewTextBoxColumn
-            // 
-            this.catIDDataGridViewTextBoxColumn.DataPropertyName = "CatID";
-            this.catIDDataGridViewTextBoxColumn.HeaderText = "CatID";
-            this.catIDDataGridViewTextBoxColumn.Name = "catIDDataGridViewTextBoxColumn";
-            // 
-            // catNameDataGridViewTextBoxColumn
-            // 
-            this.catNameDataGridViewTextBoxColumn.DataPropertyName = "CatName";
-            this.catNameDataGridViewTextBoxColumn.HeaderText = "CatName";
-            this.catNameDataGridViewTextBoxColumn.Name = "catNameDataGridViewTextBoxColumn";
-            // 
-            // catDescDataGridViewTextBoxColumn
-            // 
-            this.catDescDataGridViewTextBoxColumn.DataPropertyName = "CatDesc";
-            this.catDescDataGridViewTextBoxColumn.HeaderText = "CatDesc";
-            this.catDescDataGridViewTextBoxColumn.Name = "catDescDataGridViewTextBoxColumn";
-            // 
             // Form4
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -287,8 +240,6 @@ namespace WindowsFormsApp3
             this.Text = "Form4";
             this.Load += new System.EventHandler(this.Form4_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -312,11 +263,5 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
-        private DB1DataSet dB1DataSet;
-        private System.Windows.Forms.BindingSource categoriesBindingSource;
-        private DB1DataSetTableAdapters.CategoriesTableAdapter categoriesTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn catIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn catNameDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn catDescDataGridViewTextBoxColumn;
     }
 }
