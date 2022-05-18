@@ -129,7 +129,8 @@ namespace WindowsFormsApp3
                 MessageBox.Show(ex.Message);
             }
         }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int index = e.RowIndex;
             DataGridViewRow selectedRow = dataGridView1.Rows[index];
@@ -137,7 +138,7 @@ namespace WindowsFormsApp3
             textBox2.Text = selectedRow.Cells[1].Value.ToString();
             textBox3.Text = selectedRow.Cells[2].Value.ToString();
             textBox4.Text = selectedRow.Cells[3].Value.ToString();
-            comboBox1.Text = selectedRow.Cells[4].Value.ToString();      
+            comboBox1.Text = selectedRow.Cells[4].Value.ToString();
         }
     }
 }

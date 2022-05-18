@@ -39,6 +39,13 @@ namespace WindowsFormsApp3
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.sellerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellerAgeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellerPhoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellerPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sellersBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dB1DataSet = new WindowsFormsApp3.DB1DataSet();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -52,17 +59,10 @@ namespace WindowsFormsApp3
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.dB1DataSet = new WindowsFormsApp3.DB1DataSet();
-            this.sellersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sellersTableAdapter = new WindowsFormsApp3.DB1DataSetTableAdapters.SellersTableAdapter();
-            this.sellerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellerNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellerAgeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellerPhoneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sellerPasswordDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellersBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -150,7 +150,47 @@ namespace WindowsFormsApp3
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(399, 365);
             this.dataGridView1.TabIndex = 9;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // sellerIDDataGridViewTextBoxColumn
+            // 
+            this.sellerIDDataGridViewTextBoxColumn.DataPropertyName = "SellerID";
+            this.sellerIDDataGridViewTextBoxColumn.HeaderText = "SellerID";
+            this.sellerIDDataGridViewTextBoxColumn.Name = "sellerIDDataGridViewTextBoxColumn";
+            // 
+            // sellerNameDataGridViewTextBoxColumn
+            // 
+            this.sellerNameDataGridViewTextBoxColumn.DataPropertyName = "SellerName";
+            this.sellerNameDataGridViewTextBoxColumn.HeaderText = "SellerName";
+            this.sellerNameDataGridViewTextBoxColumn.Name = "sellerNameDataGridViewTextBoxColumn";
+            // 
+            // sellerAgeDataGridViewTextBoxColumn
+            // 
+            this.sellerAgeDataGridViewTextBoxColumn.DataPropertyName = "SellerAge";
+            this.sellerAgeDataGridViewTextBoxColumn.HeaderText = "SellerAge";
+            this.sellerAgeDataGridViewTextBoxColumn.Name = "sellerAgeDataGridViewTextBoxColumn";
+            // 
+            // sellerPhoneDataGridViewTextBoxColumn
+            // 
+            this.sellerPhoneDataGridViewTextBoxColumn.DataPropertyName = "SellerPhone";
+            this.sellerPhoneDataGridViewTextBoxColumn.HeaderText = "SellerPhone";
+            this.sellerPhoneDataGridViewTextBoxColumn.Name = "sellerPhoneDataGridViewTextBoxColumn";
+            // 
+            // sellerPasswordDataGridViewTextBoxColumn
+            // 
+            this.sellerPasswordDataGridViewTextBoxColumn.DataPropertyName = "SellerPassword";
+            this.sellerPasswordDataGridViewTextBoxColumn.HeaderText = "SellerPassword";
+            this.sellerPasswordDataGridViewTextBoxColumn.Name = "sellerPasswordDataGridViewTextBoxColumn";
+            // 
+            // sellersBindingSource
+            // 
+            this.sellersBindingSource.DataMember = "Sellers";
+            this.sellersBindingSource.DataSource = this.dB1DataSet;
+            // 
+            // dB1DataSet
+            // 
+            this.dB1DataSet.DataSetName = "DB1DataSet";
+            this.dB1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // textBox1
             // 
@@ -275,49 +315,9 @@ namespace WindowsFormsApp3
             this.label7.TabIndex = 23;
             this.label7.Text = "Seller Password";
             // 
-            // dB1DataSet
-            // 
-            this.dB1DataSet.DataSetName = "DB1DataSet";
-            this.dB1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // sellersBindingSource
-            // 
-            this.sellersBindingSource.DataMember = "Sellers";
-            this.sellersBindingSource.DataSource = this.dB1DataSet;
-            // 
             // sellersTableAdapter
             // 
             this.sellersTableAdapter.ClearBeforeFill = true;
-            // 
-            // sellerIDDataGridViewTextBoxColumn
-            // 
-            this.sellerIDDataGridViewTextBoxColumn.DataPropertyName = "SellerID";
-            this.sellerIDDataGridViewTextBoxColumn.HeaderText = "SellerID";
-            this.sellerIDDataGridViewTextBoxColumn.Name = "sellerIDDataGridViewTextBoxColumn";
-            // 
-            // sellerNameDataGridViewTextBoxColumn
-            // 
-            this.sellerNameDataGridViewTextBoxColumn.DataPropertyName = "SellerName";
-            this.sellerNameDataGridViewTextBoxColumn.HeaderText = "SellerName";
-            this.sellerNameDataGridViewTextBoxColumn.Name = "sellerNameDataGridViewTextBoxColumn";
-            // 
-            // sellerAgeDataGridViewTextBoxColumn
-            // 
-            this.sellerAgeDataGridViewTextBoxColumn.DataPropertyName = "SellerAge";
-            this.sellerAgeDataGridViewTextBoxColumn.HeaderText = "SellerAge";
-            this.sellerAgeDataGridViewTextBoxColumn.Name = "sellerAgeDataGridViewTextBoxColumn";
-            // 
-            // sellerPhoneDataGridViewTextBoxColumn
-            // 
-            this.sellerPhoneDataGridViewTextBoxColumn.DataPropertyName = "SellerPhone";
-            this.sellerPhoneDataGridViewTextBoxColumn.HeaderText = "SellerPhone";
-            this.sellerPhoneDataGridViewTextBoxColumn.Name = "sellerPhoneDataGridViewTextBoxColumn";
-            // 
-            // sellerPasswordDataGridViewTextBoxColumn
-            // 
-            this.sellerPasswordDataGridViewTextBoxColumn.DataPropertyName = "SellerPassword";
-            this.sellerPasswordDataGridViewTextBoxColumn.HeaderText = "SellerPassword";
-            this.sellerPasswordDataGridViewTextBoxColumn.Name = "sellerPasswordDataGridViewTextBoxColumn";
             // 
             // Form2
             // 
@@ -348,8 +348,8 @@ namespace WindowsFormsApp3
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sellersBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -41,6 +41,11 @@ namespace WindowsFormsApp3
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.catIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.catNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.catDescDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dB1DataSet = new WindowsFormsApp3.DB1DataSet();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -48,15 +53,10 @@ namespace WindowsFormsApp3
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dB1DataSet = new WindowsFormsApp3.DB1DataSet();
-            this.categoriesBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.categoriesTableAdapter = new WindowsFormsApp3.DB1DataSetTableAdapters.CategoriesTableAdapter();
-            this.catIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.catDescDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox3
@@ -165,7 +165,35 @@ namespace WindowsFormsApp3
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(399, 365);
             this.dataGridView1.TabIndex = 40;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // catIDDataGridViewTextBoxColumn
+            // 
+            this.catIDDataGridViewTextBoxColumn.DataPropertyName = "CatID";
+            this.catIDDataGridViewTextBoxColumn.HeaderText = "CatID";
+            this.catIDDataGridViewTextBoxColumn.Name = "catIDDataGridViewTextBoxColumn";
+            // 
+            // catNameDataGridViewTextBoxColumn
+            // 
+            this.catNameDataGridViewTextBoxColumn.DataPropertyName = "CatName";
+            this.catNameDataGridViewTextBoxColumn.HeaderText = "CatName";
+            this.catNameDataGridViewTextBoxColumn.Name = "catNameDataGridViewTextBoxColumn";
+            // 
+            // catDescDataGridViewTextBoxColumn
+            // 
+            this.catDescDataGridViewTextBoxColumn.DataPropertyName = "CatDesc";
+            this.catDescDataGridViewTextBoxColumn.HeaderText = "CatDesc";
+            this.catDescDataGridViewTextBoxColumn.Name = "catDescDataGridViewTextBoxColumn";
+            // 
+            // categoriesBindingSource
+            // 
+            this.categoriesBindingSource.DataMember = "Categories";
+            this.categoriesBindingSource.DataSource = this.dB1DataSet;
+            // 
+            // dB1DataSet
+            // 
+            this.dB1DataSet.DataSetName = "DB1DataSet";
+            this.dB1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label1
             // 
@@ -230,37 +258,9 @@ namespace WindowsFormsApp3
             this.textBox1.Size = new System.Drawing.Size(176, 26);
             this.textBox1.TabIndex = 54;
             // 
-            // dB1DataSet
-            // 
-            this.dB1DataSet.DataSetName = "DB1DataSet";
-            this.dB1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // categoriesBindingSource
-            // 
-            this.categoriesBindingSource.DataMember = "Categories";
-            this.categoriesBindingSource.DataSource = this.dB1DataSet;
-            // 
             // categoriesTableAdapter
             // 
             this.categoriesTableAdapter.ClearBeforeFill = true;
-            // 
-            // catIDDataGridViewTextBoxColumn
-            // 
-            this.catIDDataGridViewTextBoxColumn.DataPropertyName = "CatID";
-            this.catIDDataGridViewTextBoxColumn.HeaderText = "CatID";
-            this.catIDDataGridViewTextBoxColumn.Name = "catIDDataGridViewTextBoxColumn";
-            // 
-            // catNameDataGridViewTextBoxColumn
-            // 
-            this.catNameDataGridViewTextBoxColumn.DataPropertyName = "CatName";
-            this.catNameDataGridViewTextBoxColumn.HeaderText = "CatName";
-            this.catNameDataGridViewTextBoxColumn.Name = "catNameDataGridViewTextBoxColumn";
-            // 
-            // catDescDataGridViewTextBoxColumn
-            // 
-            this.catDescDataGridViewTextBoxColumn.DataPropertyName = "CatDesc";
-            this.catDescDataGridViewTextBoxColumn.HeaderText = "CatDesc";
-            this.catDescDataGridViewTextBoxColumn.Name = "catDescDataGridViewTextBoxColumn";
             // 
             // Form4
             // 
@@ -287,8 +287,8 @@ namespace WindowsFormsApp3
             this.Text = "Form4";
             this.Load += new System.EventHandler(this.Form4_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.categoriesBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

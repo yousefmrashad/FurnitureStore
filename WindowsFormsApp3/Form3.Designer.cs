@@ -41,6 +41,13 @@ namespace WindowsFormsApp3
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.prodIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.prodCatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dB1DataSet = new WindowsFormsApp3.DB1DataSet();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -52,17 +59,10 @@ namespace WindowsFormsApp3
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.dB1DataSet = new WindowsFormsApp3.DB1DataSet();
-            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.productsTableAdapter = new WindowsFormsApp3.DB1DataSetTableAdapters.ProductsTableAdapter();
-            this.prodIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodCatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox3
@@ -173,7 +173,47 @@ namespace WindowsFormsApp3
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.Size = new System.Drawing.Size(399, 365);
             this.dataGridView1.TabIndex = 25;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            // 
+            // prodIDDataGridViewTextBoxColumn
+            // 
+            this.prodIDDataGridViewTextBoxColumn.DataPropertyName = "ProdID";
+            this.prodIDDataGridViewTextBoxColumn.HeaderText = "ProdID";
+            this.prodIDDataGridViewTextBoxColumn.Name = "prodIDDataGridViewTextBoxColumn";
+            // 
+            // prodNameDataGridViewTextBoxColumn
+            // 
+            this.prodNameDataGridViewTextBoxColumn.DataPropertyName = "ProdName";
+            this.prodNameDataGridViewTextBoxColumn.HeaderText = "ProdName";
+            this.prodNameDataGridViewTextBoxColumn.Name = "prodNameDataGridViewTextBoxColumn";
+            // 
+            // prodQtyDataGridViewTextBoxColumn
+            // 
+            this.prodQtyDataGridViewTextBoxColumn.DataPropertyName = "ProdQty";
+            this.prodQtyDataGridViewTextBoxColumn.HeaderText = "ProdQty";
+            this.prodQtyDataGridViewTextBoxColumn.Name = "prodQtyDataGridViewTextBoxColumn";
+            // 
+            // prodPriceDataGridViewTextBoxColumn
+            // 
+            this.prodPriceDataGridViewTextBoxColumn.DataPropertyName = "ProdPrice";
+            this.prodPriceDataGridViewTextBoxColumn.HeaderText = "ProdPrice";
+            this.prodPriceDataGridViewTextBoxColumn.Name = "prodPriceDataGridViewTextBoxColumn";
+            // 
+            // prodCatDataGridViewTextBoxColumn
+            // 
+            this.prodCatDataGridViewTextBoxColumn.DataPropertyName = "ProdCat";
+            this.prodCatDataGridViewTextBoxColumn.HeaderText = "ProdCat";
+            this.prodCatDataGridViewTextBoxColumn.Name = "prodCatDataGridViewTextBoxColumn";
+            // 
+            // productsBindingSource
+            // 
+            this.productsBindingSource.DataMember = "Products";
+            this.productsBindingSource.DataSource = this.dB1DataSet;
+            // 
+            // dB1DataSet
+            // 
+            this.dB1DataSet.DataSetName = "DB1DataSet";
+            this.dB1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label1
             // 
@@ -276,49 +316,9 @@ namespace WindowsFormsApp3
             this.comboBox1.Size = new System.Drawing.Size(176, 28);
             this.comboBox1.TabIndex = 64;
             // 
-            // dB1DataSet
-            // 
-            this.dB1DataSet.DataSetName = "DB1DataSet";
-            this.dB1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // productsBindingSource
-            // 
-            this.productsBindingSource.DataMember = "Products";
-            this.productsBindingSource.DataSource = this.dB1DataSet;
-            // 
             // productsTableAdapter
             // 
             this.productsTableAdapter.ClearBeforeFill = true;
-            // 
-            // prodIDDataGridViewTextBoxColumn
-            // 
-            this.prodIDDataGridViewTextBoxColumn.DataPropertyName = "ProdID";
-            this.prodIDDataGridViewTextBoxColumn.HeaderText = "ProdID";
-            this.prodIDDataGridViewTextBoxColumn.Name = "prodIDDataGridViewTextBoxColumn";
-            // 
-            // prodNameDataGridViewTextBoxColumn
-            // 
-            this.prodNameDataGridViewTextBoxColumn.DataPropertyName = "ProdName";
-            this.prodNameDataGridViewTextBoxColumn.HeaderText = "ProdName";
-            this.prodNameDataGridViewTextBoxColumn.Name = "prodNameDataGridViewTextBoxColumn";
-            // 
-            // prodQtyDataGridViewTextBoxColumn
-            // 
-            this.prodQtyDataGridViewTextBoxColumn.DataPropertyName = "ProdQty";
-            this.prodQtyDataGridViewTextBoxColumn.HeaderText = "ProdQty";
-            this.prodQtyDataGridViewTextBoxColumn.Name = "prodQtyDataGridViewTextBoxColumn";
-            // 
-            // prodPriceDataGridViewTextBoxColumn
-            // 
-            this.prodPriceDataGridViewTextBoxColumn.DataPropertyName = "ProdPrice";
-            this.prodPriceDataGridViewTextBoxColumn.HeaderText = "ProdPrice";
-            this.prodPriceDataGridViewTextBoxColumn.Name = "prodPriceDataGridViewTextBoxColumn";
-            // 
-            // prodCatDataGridViewTextBoxColumn
-            // 
-            this.prodCatDataGridViewTextBoxColumn.DataPropertyName = "ProdCat";
-            this.prodCatDataGridViewTextBoxColumn.HeaderText = "ProdCat";
-            this.prodCatDataGridViewTextBoxColumn.Name = "prodCatDataGridViewTextBoxColumn";
             // 
             // Form3
             // 
@@ -349,8 +349,8 @@ namespace WindowsFormsApp3
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
