@@ -14,7 +14,7 @@ namespace WindowsFormsApp3
     public partial class Form1 : Form
     {
         public string SellerName;
-        public int SellerID;
+        public static int SellerID;
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter da;
@@ -68,11 +68,11 @@ namespace WindowsFormsApp3
                         {
                             if ((string)i["SellerPassword"] == textBox2.Text)
                             {
+                                SellerName = textBox1.Text;
+                                SellerID = (int)i["SellerID"];
                                 Form5 form5 = new Form5();
                                 this.Hide();
                                 form5.Show();
-                                SellerName = i["SellerName"].ToString();
-                                SellerID = (int)i["SellerID"];
                             }
                             else
                             {

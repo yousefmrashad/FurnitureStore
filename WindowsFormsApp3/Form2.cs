@@ -91,7 +91,7 @@ namespace WindowsFormsApp3
                 da.Fill(ds, "Sellers");
                 dataGridView1.DataSource = ds.Tables["Sellers"];
                 dataGridView1.Refresh();
-
+                clear();
             }
             catch (Exception ex)
             {
@@ -112,7 +112,7 @@ namespace WindowsFormsApp3
                 da.Fill(ds, "Sellers");
                 dataGridView1.DataSource = ds.Tables["Sellers"];
                 dataGridView1.Refresh();
-
+                clear();
             }
             catch (Exception ex)
             {
@@ -133,6 +133,7 @@ namespace WindowsFormsApp3
                 da.Fill(ds, "Sellers");
                 dataGridView1.DataSource = ds.Tables["Sellers"];
                 dataGridView1.Refresh();
+                clear();
             }
             catch (Exception ex)
             {
@@ -156,6 +157,15 @@ namespace WindowsFormsApp3
             {
 
             }
+        }
+
+        void clear()
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
         }
     }
 }

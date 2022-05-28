@@ -34,6 +34,14 @@ namespace WindowsFormsApp3
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "Products");
                 dataGridView1.DataSource = ds.Tables["Products"];
+                cmd = new SqlCommand("SELECT * FROM Categories", conn);
+                cmd.ExecuteNonQuery();
+                da = new SqlDataAdapter(cmd);
+                da.Fill(ds, "Categories");
+                foreach (DataRow dr in ds.Tables["Categories"].Rows)
+                {
+                    comboBox1.Items.Add(dr["CatName"].ToString());
+                }
                 MessageBox.Show("Connected");
                 dataGridView1.Refresh();
             }
@@ -77,7 +85,7 @@ namespace WindowsFormsApp3
         {
             try
             {
-                cmd = new SqlCommand($"INSERT INTO Products VALUES({textBox1.Text},'{textBox2.Text}',{textBox3.Text},{textBox4.Text}, {Convert.ToInt32(comboBox1.SelectedItem)})", conn);
+                cmd = new SqlCommand($"INSERT INTO Products VALUES({textBox1.Text},'{textBox2.Text}',{textBox3.Text},{textBox4.Text}, {comboBox1.SelectedIndex+1})", conn);
                 cmd.ExecuteNonQuery();
                 ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
@@ -86,6 +94,7 @@ namespace WindowsFormsApp3
                 da.Fill(ds, "Products");
                 dataGridView1.DataSource = ds.Tables["Products"];
                 dataGridView1.Refresh();
+                clear();
             }
             catch (Exception ex)
             {
@@ -106,6 +115,7 @@ namespace WindowsFormsApp3
                 da.Fill(ds, "Products");
                 dataGridView1.DataSource = ds.Tables["Products"];
                 dataGridView1.Refresh();
+                clear();
             }
             catch (Exception ex)
             {
@@ -126,6 +136,7 @@ namespace WindowsFormsApp3
                 da.Fill(ds, "Products");
                 dataGridView1.DataSource = ds.Tables["Products"];
                 dataGridView1.Refresh();
+                clear();
             }
             catch (Exception ex)
             {
@@ -149,6 +160,13 @@ namespace WindowsFormsApp3
             {
 
             }
+        }
+        void clear()
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
         }
     }
 }
