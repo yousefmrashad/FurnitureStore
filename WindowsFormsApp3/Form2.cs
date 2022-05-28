@@ -84,7 +84,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"INSERT INTO Sellers VALUES({textBox1.Text},'{textBox2.Text}',{textBox3.Text},{textBox4.Text},'{textBox5.Text}')", conn);
                 cmd.ExecuteNonQuery();
-                da.Dispose();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Sellers", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
@@ -105,7 +105,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"UPDATE Sellers SET SellerName = '{textBox2.Text}', SellerAge = {textBox3.Text}, SellerPhone = {textBox4.Text}, SellerPassword = '{textBox5.Text}' WHERE SellerID = {textBox1.Text}", conn);
                 cmd.ExecuteNonQuery();
-                da.Dispose();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Sellers", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
@@ -126,7 +126,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"DELETE FROM Sellers WHERE SellerID = {textBox1.Text}", conn);
                 cmd.ExecuteNonQuery();
-                da.Dispose();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Sellers", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);

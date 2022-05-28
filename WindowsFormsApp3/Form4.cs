@@ -81,6 +81,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"INSERT INTO Categories VALUES({textBox1.Text},'{textBox2.Text}','{textBox3.Text}')", conn);
                 cmd.ExecuteNonQuery();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Categories", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
@@ -100,6 +101,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"UPDATE Categories SET CatName = '{textBox2.Text}', CatDesc = '{textBox3.Text}' WHERE CatID = {textBox1.Text}", conn);
                 cmd.ExecuteNonQuery();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Categories", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
@@ -119,6 +121,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"DELETE FROM Categories WHERE CatID = {textBox1.Text}", conn);
                 cmd.ExecuteNonQuery();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Categories", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);

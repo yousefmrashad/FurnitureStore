@@ -114,7 +114,7 @@ namespace WindowsFormsApp3
                 //TODO:
                 cmd = new SqlCommand($"INSERT INTO ReceiptDetails VALUES({textBox1.Text}, {ProdID}, {int.Parse(textBox3.Text)}", conn);
                 cmd.ExecuteNonQuery();
-                da.Dispose();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM ReceiptDetails", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
@@ -153,7 +153,7 @@ namespace WindowsFormsApp3
         {
             cmd = new SqlCommand($"INSERT INTO Receipts VALUES({textBox1.Text}, {form1.SellerID}, {DateTime.Now.ToShortDateString()}", conn);
             cmd.ExecuteNonQuery();
-            da.Dispose();
+            ds.Clear();
             cmd = new SqlCommand("SELECT * FROM Receipts", conn);
             cmd.ExecuteNonQuery();
             da = new SqlDataAdapter(cmd);

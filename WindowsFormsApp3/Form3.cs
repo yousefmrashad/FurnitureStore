@@ -79,6 +79,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"INSERT INTO Products VALUES({textBox1.Text},'{textBox2.Text}',{textBox3.Text},{textBox4.Text}, {Convert.ToInt32(comboBox1.SelectedItem)})", conn);
                 cmd.ExecuteNonQuery();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
@@ -98,6 +99,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"UPDATE Products SET ProdName = '{textBox2.Text}', ProdQty = {textBox3.Text}, ProdPrice = {textBox4.Text}, ProdCat= {Convert.ToInt32(comboBox1.SelectedItem)} WHERE ProdID = {textBox1.Text}", conn);
                 cmd.ExecuteNonQuery();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
@@ -117,6 +119,7 @@ namespace WindowsFormsApp3
             {
                 cmd = new SqlCommand($"DELETE FROM Products WHERE ProdID = {textBox1.Text}", conn);
                 cmd.ExecuteNonQuery();
+                ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
