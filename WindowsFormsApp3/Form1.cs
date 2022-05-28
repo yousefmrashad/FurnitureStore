@@ -13,7 +13,7 @@ namespace WindowsFormsApp3
 {
     public partial class Form1 : Form
     {
-        public string SellerName;
+        public static string SellerName;
         public static int SellerID;
         SqlConnection conn;
         SqlCommand cmd;
