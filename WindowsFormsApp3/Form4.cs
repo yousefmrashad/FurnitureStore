@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
@@ -11,6 +12,7 @@ namespace WindowsFormsApp3
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter da;
+        private DataSet ds = new DataSet();
 
         public Form4()
         {
@@ -19,8 +21,6 @@ namespace WindowsFormsApp3
 
         private void Form4_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dB1DataSet.Categories' table. You can move, or remove it, as needed.
-            this.categoriesTableAdapter.Fill(this.dB1DataSet.Categories);
             checkBox3.Checked = true;
             checkBox3.BackColor = Color.Gray;
             checkBox3.Enabled = false;
@@ -34,8 +34,8 @@ namespace WindowsFormsApp3
                 cmd = new SqlCommand("SELECT * FROM Categories", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dB1DataSet, "Categories");
-                dataGridView1.DataSource = dB1DataSet.Tables["Categories"];
+                da.Fill(ds, "Categories");
+                dataGridView1.DataSource = ds.Tables["Categories"];
                 MessageBox.Show("Connected");
                 dataGridView1.Refresh();
             }
@@ -84,8 +84,8 @@ namespace WindowsFormsApp3
                 cmd = new SqlCommand("SELECT * FROM Categories", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dB1DataSet, "Categories");
-                dataGridView1.DataSource = dB1DataSet.Tables["Categories"];
+                da.Fill(ds, "Categories");
+                dataGridView1.DataSource = ds.Tables["Categories"];
                 dataGridView1.Refresh();
             }
             catch (Exception ex)
@@ -103,8 +103,8 @@ namespace WindowsFormsApp3
                 cmd = new SqlCommand("SELECT * FROM Categories", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dB1DataSet, "Categories");
-                dataGridView1.DataSource = dB1DataSet.Tables["Categories"];
+                da.Fill(ds, "Categories");
+                dataGridView1.DataSource = ds.Tables["Categories"];
                 dataGridView1.Refresh();
             }
             catch (Exception ex)
@@ -122,8 +122,8 @@ namespace WindowsFormsApp3
                 cmd = new SqlCommand("SELECT * FROM Categories", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dB1DataSet, "Categories");
-                dataGridView1.DataSource = dB1DataSet.Tables["Categories"];
+                da.Fill(ds, "Categories");
+                dataGridView1.DataSource = ds.Tables["Categories"];
                 dataGridView1.Refresh();
             }
             catch (Exception ex)
@@ -134,11 +134,18 @@ namespace WindowsFormsApp3
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int index = e.RowIndex;
-            DataGridViewRow selectedRow = dataGridView1.Rows[index];
-            textBox1.Text = selectedRow.Cells[0].Value.ToString();
-            textBox2.Text = selectedRow.Cells[1].Value.ToString();
-            textBox3.Text = selectedRow.Cells[2].Value.ToString();
+            try
+            {
+                int index = e.RowIndex;
+                DataGridViewRow selectedRow = dataGridView1.Rows[index];
+                textBox1.Text = selectedRow.Cells[0].Value.ToString();
+                textBox2.Text = selectedRow.Cells[1].Value.ToString();
+                textBox3.Text = selectedRow.Cells[2].Value.ToString();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

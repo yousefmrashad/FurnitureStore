@@ -12,3 +12,4 @@ C:\Users\youse\RiderProjects\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\Windows
 C:\Users\youse\RiderProjects\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form2.resources
 C:\Users\youse\RiderProjects\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form3.resources
 C:\Users\youse\RiderProjects\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form4.resources
+C:\Users\youse\RiderProjects\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form5.resources

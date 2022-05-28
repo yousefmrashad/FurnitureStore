@@ -40,7 +40,9 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] { "Admin", "Seller" });
+            this.comboBox1.Items.AddRange(new object[] {
+            "Admin",
+            "Seller"});
             this.comboBox1.Location = new System.Drawing.Point(118, 58);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(152, 21);
@@ -107,6 +109,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.TextBox textBox1;

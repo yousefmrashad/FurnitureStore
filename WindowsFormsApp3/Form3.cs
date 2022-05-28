@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Data.SqlClient;
@@ -10,6 +11,7 @@ namespace WindowsFormsApp3
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter da;
+        private DataSet ds = new DataSet();
 
         public Form3()
         {
@@ -18,8 +20,6 @@ namespace WindowsFormsApp3
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dB1DataSet.Products' table. You can move, or remove it, as needed.
-            this.productsTableAdapter.Fill(this.dB1DataSet.Products);
             checkBox2.Checked = true;
             checkBox2.BackColor = Color.Gray;
             checkBox2.Enabled = false;    
@@ -32,8 +32,8 @@ namespace WindowsFormsApp3
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dB1DataSet, "Products");
-                dataGridView1.DataSource = dB1DataSet.Tables["Products"];
+                da.Fill(ds, "Products");
+                dataGridView1.DataSource = ds.Tables["Products"];
                 MessageBox.Show("Connected");
                 dataGridView1.Refresh();
             }
@@ -77,13 +77,13 @@ namespace WindowsFormsApp3
         {
             try
             {
-                cmd = new SqlCommand($"INSERT INTO Products VALUES({textBox1.Text},'{textBox2.Text}',{textBox3.Text},{textBox4.Text},'{comboBox1.SelectedItem.ToString()}')", conn);
+                cmd = new SqlCommand($"INSERT INTO Products VALUES({textBox1.Text},'{textBox2.Text}',{textBox3.Text},{textBox4.Text}, {Convert.ToInt32(comboBox1.SelectedItem)})", conn);
                 cmd.ExecuteNonQuery();
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dB1DataSet, "Products");
-                dataGridView1.DataSource = dB1DataSet.Tables["Products"];
+                da.Fill(ds, "Products");
+                dataGridView1.DataSource = ds.Tables["Products"];
                 dataGridView1.Refresh();
             }
             catch (Exception ex)
@@ -96,13 +96,13 @@ namespace WindowsFormsApp3
         {
             try
             {
-                cmd = new SqlCommand($"UPDATE Products SET ProdName = '{textBox2.Text}', ProdQty = {textBox3.Text}, ProdPrice = {textBox4.Text}, ProdCat= '{comboBox1.SelectedItem.ToString()}' WHERE ProdID = {textBox1.Text}", conn);
+                cmd = new SqlCommand($"UPDATE Products SET ProdName = '{textBox2.Text}', ProdQty = {textBox3.Text}, ProdPrice = {textBox4.Text}, ProdCat= {Convert.ToInt32(comboBox1.SelectedItem)} WHERE ProdID = {textBox1.Text}", conn);
                 cmd.ExecuteNonQuery();
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dB1DataSet, "Products");
-                dataGridView1.DataSource = dB1DataSet.Tables["Products"];
+                da.Fill(ds, "Products");
+                dataGridView1.DataSource = ds.Tables["Products"];
                 dataGridView1.Refresh();
             }
             catch (Exception ex)
@@ -120,8 +120,8 @@ namespace WindowsFormsApp3
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
-                da.Fill(dB1DataSet, "Products");
-                dataGridView1.DataSource = dB1DataSet.Tables["Products"];
+                da.Fill(ds, "Products");
+                dataGridView1.DataSource = ds.Tables["Products"];
                 dataGridView1.Refresh();
             }
             catch (Exception ex)
@@ -132,13 +132,20 @@ namespace WindowsFormsApp3
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int index = e.RowIndex;
-            DataGridViewRow selectedRow = dataGridView1.Rows[index];
-            textBox1.Text = selectedRow.Cells[0].Value.ToString();
-            textBox2.Text = selectedRow.Cells[1].Value.ToString();
-            textBox3.Text = selectedRow.Cells[2].Value.ToString();
-            textBox4.Text = selectedRow.Cells[3].Value.ToString();
-            comboBox1.Text = selectedRow.Cells[4].Value.ToString();
+            try
+            {
+                int index = e.RowIndex;
+                DataGridViewRow selectedRow = dataGridView1.Rows[index];
+                textBox1.Text = selectedRow.Cells[0].Value.ToString();
+                textBox2.Text = selectedRow.Cells[1].Value.ToString();
+                textBox3.Text = selectedRow.Cells[2].Value.ToString();
+                textBox4.Text = selectedRow.Cells[3].Value.ToString();
+                comboBox1.Text = selectedRow.Cells[4].Value.ToString();
+            }
+            catch
+            {
+
+            }
         }
     }
 }

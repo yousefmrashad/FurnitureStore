@@ -31,7 +31,6 @@ namespace WindowsFormsApp3
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -40,14 +39,6 @@ namespace WindowsFormsApp3
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.prodIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodQtyDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodPriceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.prodCatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.productsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dB1DataSet = new WindowsFormsApp3.DB1DataSet();
             this.label1 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -59,10 +50,8 @@ namespace WindowsFormsApp3
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.productsTableAdapter = new WindowsFormsApp3.DB1DataSetTableAdapters.ProductsTableAdapter();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // checkBox3
@@ -157,63 +146,6 @@ namespace WindowsFormsApp3
             this.button3.Text = "Add";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.prodIDDataGridViewTextBoxColumn,
-            this.prodNameDataGridViewTextBoxColumn,
-            this.prodQtyDataGridViewTextBoxColumn,
-            this.prodPriceDataGridViewTextBoxColumn,
-            this.prodCatDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.productsBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(389, 149);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(399, 365);
-            this.dataGridView1.TabIndex = 25;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            // 
-            // prodIDDataGridViewTextBoxColumn
-            // 
-            this.prodIDDataGridViewTextBoxColumn.DataPropertyName = "ProdID";
-            this.prodIDDataGridViewTextBoxColumn.HeaderText = "ProdID";
-            this.prodIDDataGridViewTextBoxColumn.Name = "prodIDDataGridViewTextBoxColumn";
-            // 
-            // prodNameDataGridViewTextBoxColumn
-            // 
-            this.prodNameDataGridViewTextBoxColumn.DataPropertyName = "ProdName";
-            this.prodNameDataGridViewTextBoxColumn.HeaderText = "ProdName";
-            this.prodNameDataGridViewTextBoxColumn.Name = "prodNameDataGridViewTextBoxColumn";
-            // 
-            // prodQtyDataGridViewTextBoxColumn
-            // 
-            this.prodQtyDataGridViewTextBoxColumn.DataPropertyName = "ProdQty";
-            this.prodQtyDataGridViewTextBoxColumn.HeaderText = "ProdQty";
-            this.prodQtyDataGridViewTextBoxColumn.Name = "prodQtyDataGridViewTextBoxColumn";
-            // 
-            // prodPriceDataGridViewTextBoxColumn
-            // 
-            this.prodPriceDataGridViewTextBoxColumn.DataPropertyName = "ProdPrice";
-            this.prodPriceDataGridViewTextBoxColumn.HeaderText = "ProdPrice";
-            this.prodPriceDataGridViewTextBoxColumn.Name = "prodPriceDataGridViewTextBoxColumn";
-            // 
-            // prodCatDataGridViewTextBoxColumn
-            // 
-            this.prodCatDataGridViewTextBoxColumn.DataPropertyName = "ProdCat";
-            this.prodCatDataGridViewTextBoxColumn.HeaderText = "ProdCat";
-            this.prodCatDataGridViewTextBoxColumn.Name = "prodCatDataGridViewTextBoxColumn";
-            // 
-            // productsBindingSource
-            // 
-            this.productsBindingSource.DataMember = "Products";
-            this.productsBindingSource.DataSource = this.dB1DataSet;
-            // 
-            // dB1DataSet
-            // 
-            this.dB1DataSet.DataSetName = "DB1DataSet";
-            this.dB1DataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label1
             // 
@@ -315,16 +247,22 @@ namespace WindowsFormsApp3
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(176, 28);
             this.comboBox1.TabIndex = 64;
+            this.comboBox1.ValueMember = "CatID";
             // 
-            // productsTableAdapter
+            // dataGridView1
             // 
-            this.productsTableAdapter.ClearBeforeFill = true;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(389, 149);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(399, 365);
+            this.dataGridView1.TabIndex = 65;
             // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 548);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -338,7 +276,6 @@ namespace WindowsFormsApp3
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
@@ -349,8 +286,6 @@ namespace WindowsFormsApp3
             this.Text = "Form3";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.productsBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dB1DataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -366,7 +301,6 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
@@ -378,13 +312,11 @@ namespace WindowsFormsApp3
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private DB1DataSet dB1DataSet;
-        private System.Windows.Forms.BindingSource productsBindingSource;
-        private DB1DataSetTableAdapters.ProductsTableAdapter productsTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn prodIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prodNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prodQtyDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prodPriceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn prodCatDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
