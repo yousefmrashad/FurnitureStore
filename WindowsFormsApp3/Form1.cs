@@ -42,7 +42,7 @@ namespace WindowsFormsApp3
             {
                 MessageBox.Show(ex.Message);
             }
-            comboBox1.SelectedItem = "Admin";
+            comboBox1.SelectedIndex = 0;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -91,7 +91,10 @@ namespace WindowsFormsApp3
 
         private void textBox2_KeyDown(object sender, KeyEventArgs e)
         {
-
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1.PerformClick();
+            }
         }
     }
 }
