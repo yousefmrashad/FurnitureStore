@@ -89,5 +89,9 @@ namespace WindowsFormsApp3
             }
         }
 
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
     }
 }
