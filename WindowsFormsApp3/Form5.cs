@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing.Configuration;
 
 
 namespace WindowsFormsApp3
@@ -107,34 +108,31 @@ namespace WindowsFormsApp3
                 da.Fill(ds, "ReceiptDetails");
                 dataGridView2.DataSource = ds.Tables["ReceiptDetails"];
                 dataGridView2.Refresh();
-                clear();
             }
             catch
             {
 
             }
 
-            int x = 0;
-            Int32.TryParse(textBox3.Text, out x);
-            double y = 0;
-            Double.TryParse(textBox4.Text, out y);
-            CurrentTotal += x * y;
-            label9.Text = $"Total is: {CurrentTotal.ToString()}";
+            CurrentTotal += int.Parse(textBox3.Text) * double.Parse(textBox4.Text);
+            label9.Text = $"Total is: {CurrentTotal.ToString()} LE";
+            clear();
 
             }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            printPreviewDialog1.Document = printDocument1;
             printPreviewDialog1.ShowDialog();
         }
 
-        private void printPreviewDialog1_Load(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            string doc = " ";
-            if(dataGridView1.SelectedRows.Count > 0)
+            string doc = "";
+            if (dataGridView1.SelectedRows.Count > 0)
             {
-                doc += dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                doc += "\n" + dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+                doc += "Receipt ID: " + dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+                doc += "\n" + "Seller ID: " + dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
                 doc += "\n" + dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
                 doc += "\n" + dataGridView1.SelectedRows[0].Cells[3].Value.ToString() + "LE";
             }
