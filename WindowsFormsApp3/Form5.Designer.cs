@@ -55,6 +55,7 @@
             this.printPreviewDialog1 = new System.Windows.Forms.PrintPreviewDialog();
             this.button7 = new System.Windows.Forms.Button();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
@@ -252,14 +253,14 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(121, 50);
             this.button4.TabIndex = 80;
-            this.button4.Text = "Add Receipt";
+            this.button4.Text = "Submit Receipt";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
             this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(342, 351);
+            this.button5.Location = new System.Drawing.Point(344, 351);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(102, 35);
             this.button5.TabIndex = 83;
@@ -313,11 +314,23 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button8.Location = new System.Drawing.Point(162, 18);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(102, 50);
+            this.button8.TabIndex = 86;
+            this.button8.Text = "Reload";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 681);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.button5);
@@ -393,5 +406,6 @@
         private System.Windows.Forms.PrintPreviewDialog printPreviewDialog1;
         private System.Windows.Forms.Button button7;
         private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.Button button8;
     }
 }
