@@ -170,6 +170,7 @@ namespace WindowsFormsApp3
             textBox1.Text = ReceiptNo.ToString();
             cmd = new SqlCommand($"INSERT INTO Receipts VALUES({ReceiptNo}, {Form1.SellerID}, CONVERT (DATE, GETDATE()), {0})", conn);
             cmd.ExecuteNonQuery();
+            refresh();
         }
 
         void refresh()
