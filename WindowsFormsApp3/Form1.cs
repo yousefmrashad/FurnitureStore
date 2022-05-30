@@ -18,6 +18,7 @@ namespace WindowsFormsApp3
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter da;
+        SqlDataReader dr;
         DataSet ds = new DataSet();
 
         public Form1()
@@ -62,24 +63,24 @@ namespace WindowsFormsApp3
             {
                 try
                 {
-                    foreach (DataRow i in ds.Tables["Sellers"].Rows)
+                    cmd = new SqlCommand($"SELECT * FROM Sellers where SellerName= '{textBox1.Text}' and SellerPassword = '{textBox2.Text}'", conn);
+                    dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
                     {
-                        if ((string)i["SellerName"] == textBox1.Text)
+                        SellerName = textBox1.Text;
+                        while (dr.Read())
                         {
-                            if ((string)i["SellerPassword"] == textBox2.Text)
-                            {
-                                SellerName = textBox1.Text;
-                                SellerID = (int)i["SellerID"];
-                                Form5 form5 = new Form5();
-                                this.Hide();
-                                form5.Show();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Invalid password.");
-                            }
+                            SellerID = (int)dr[0];
                         }
+                        Form5 form5 = new Form5();
+                        this.Hide();
+                        form5.Show();
                     }
+                    else
+                    {
+                        MessageBox.Show("Wrong username or password");
+                    }
+                    dr.Close();
                 }
                 catch (Exception ex)
                 {

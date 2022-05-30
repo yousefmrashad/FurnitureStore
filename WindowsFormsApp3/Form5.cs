@@ -148,8 +148,7 @@ namespace WindowsFormsApp3
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 doc += "Receipt ID: " + dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                cmd = new SqlCommand(
-                    $"Select SellerName from Sellers where SellerID = {int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString())}", conn);
+                cmd = new SqlCommand($"Select SellerName from Sellers where SellerID = {int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString())}", conn);
                 dr = cmd.ExecuteReader();
                 while(dr.Read())
                 {
