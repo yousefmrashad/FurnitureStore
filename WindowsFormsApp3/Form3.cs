@@ -42,7 +42,6 @@ namespace WindowsFormsApp3
                 {
                     comboBox1.Items.Add(dr["CatName"].ToString());
                 }
-                MessageBox.Show("Connected");
                 dataGridView1.Refresh();
             }
             catch (Exception ex)

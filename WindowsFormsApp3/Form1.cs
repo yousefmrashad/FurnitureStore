@@ -37,7 +37,6 @@ namespace WindowsFormsApp3
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "Sellers");
-                MessageBox.Show("Connected");
             }
             catch (Exception ex)
             {

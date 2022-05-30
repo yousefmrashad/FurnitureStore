@@ -36,7 +36,6 @@ namespace WindowsFormsApp3
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "Categories");
                 dataGridView1.DataSource = ds.Tables["Categories"];
-                MessageBox.Show("Connected");
                 dataGridView1.Refresh();
             }
             catch (Exception ex)

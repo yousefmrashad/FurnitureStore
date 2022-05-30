@@ -35,7 +35,6 @@ namespace WindowsFormsApp3
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "Sellers");
                 dataGridView1.DataSource = ds.Tables["Sellers"];
-                MessageBox.Show("Connected");
                 dataGridView1.Refresh();
             }
             catch (Exception ex)

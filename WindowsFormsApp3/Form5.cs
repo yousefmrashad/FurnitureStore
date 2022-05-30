@@ -48,8 +48,6 @@ namespace WindowsFormsApp3
 
                 ReceiptNo = dataGridView1.Rows.Count;
                 textBox1.Text = ReceiptNo.ToString();
-
-                MessageBox.Show("Connected");
             }
             catch (Exception ex)
             {
