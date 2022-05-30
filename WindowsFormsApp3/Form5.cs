@@ -26,8 +26,6 @@ namespace WindowsFormsApp3
         private double CurrentTotal = 0;
         int ReceiptNo = 0;
 
-        private bool flag = true;
-
         public Form5()
         {
             InitializeComponent();
@@ -91,7 +89,7 @@ namespace WindowsFormsApp3
                 {
                     doc += "\n" + "Seller ID: " + dr[0].ToString();
                 }
-                dr.Close();
+
                 doc += "\n" + dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
                 doc += "\n" + dataGridView1.SelectedRows[0].Cells[3].Value.ToString() + "LE";
             }
@@ -114,7 +112,6 @@ namespace WindowsFormsApp3
                 CurrentTotal = 0;
                 label9.Text = $"Total is: {CurrentTotal} LE";
                 clear();
-                flag = true;
             }
             catch
             {
@@ -138,12 +135,7 @@ namespace WindowsFormsApp3
             try
             {
                 dataGridView1.Enabled = false;
-
-                if (flag)
-                { 
-                    tr = conn.BeginTransaction();
-                    flag = false;
-                } 
+                tr = conn.BeginTransaction();
 
                 if (int.Parse(dataGridView3.Rows[ProdID - 1].Cells[2].Value.ToString()) - int.Parse(textBox3.Text) < 0)
                 {
@@ -176,9 +168,9 @@ namespace WindowsFormsApp3
                 dataGridView3.DataSource = ds.Tables["Products"];
                 dataGridView3.Refresh();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
+
             }
 
             try
@@ -219,7 +211,6 @@ namespace WindowsFormsApp3
                 label9.Text = $"Total is: {CurrentTotal.ToString()} LE";
                 dataGridView1.Enabled = true;
                 refresh();
-                flag = true;
             }
             catch
             {
@@ -278,7 +269,7 @@ namespace WindowsFormsApp3
         {
             ds.Clear();
             comboBox1.Items.Clear();
-            
+
             cmd = new SqlCommand("SELECT * FROM Receipts", conn);
             cmd.ExecuteNonQuery();
             da = new SqlDataAdapter(cmd);
