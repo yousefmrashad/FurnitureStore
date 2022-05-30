@@ -88,7 +88,7 @@ namespace WindowsFormsApp3
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        doc += "\n" + "Seller ID: " + dr[0].ToString();
+                        doc += "\n" + "Seller Name: " + dr[0].ToString();
                     }
 
                     dr.Close();
@@ -103,7 +103,7 @@ namespace WindowsFormsApp3
             {
 
             }
-    }
+        }
 
     private void button4_Click(object sender, EventArgs e)
         {
