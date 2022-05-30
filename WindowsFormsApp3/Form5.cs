@@ -15,12 +15,12 @@ namespace WindowsFormsApp3
 {
     public partial class Form5 : Form
     {
-        Form1 form1 = new Form1();
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter da;
         private SqlDataReader dr;
         private DataSet ds = new DataSet();
+
         int ProdID;
         private double CurrentTotal = 0;
         int ReceiptNo = 0;
