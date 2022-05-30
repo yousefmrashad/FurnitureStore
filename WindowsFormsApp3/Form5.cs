@@ -20,6 +20,7 @@ namespace WindowsFormsApp3
         SqlDataAdapter da;
         private SqlDataReader dr;
         private DataSet ds = new DataSet();
+        SqlTransaction tr;
 
         int ProdID;
         private double CurrentTotal = 0;
@@ -34,7 +35,8 @@ namespace WindowsFormsApp3
         {
             try
             {
-                string sql = "Data Source= LAPTOP-7GNK1L4T\\SQLEXPRESS; Initial Catalog = DB1; Integrated Security=true";
+                string sql =
+                    "Data Source= LAPTOP-7GNK1L4T\\SQLEXPRESS; Initial Catalog = DB1; Integrated Security=true";
                 conn = new SqlConnection(sql);
                 conn.Open();
 
@@ -81,37 +83,52 @@ namespace WindowsFormsApp3
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 doc += "Receipt ID: " + dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                cmd = new SqlCommand($"SELECT SellerName FROM Sellers WHERE SellerID = {int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString())}", conn);
+                cmd = new SqlCommand(
+                    $"SELECT SellerName FROM Sellers WHERE SellerID = {int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString())}",
+                    conn);
                 dr = cmd.ExecuteReader();
-                while(dr.Read())
+                while (dr.Read())
                 {
                     doc += "\n" + "Seller ID: " + dr[0].ToString();
                 }
+
                 doc += "\n" + dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
                 doc += "\n" + dataGridView1.SelectedRows[0].Cells[3].Value.ToString() + "LE";
             }
-            e.Graphics.DrawString(doc, new Font("Times New Roman", 36, FontStyle.Bold), Brushes.Black, new Point(25, 25));
+
+            e.Graphics.DrawString(doc, new Font("Times New Roman", 36, FontStyle.Bold), Brushes.Black,
+                new Point(25, 25));
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            dataGridView1.Enabled = true;
-            cmd = new SqlCommand($"UPDATE Receipts SET ReceiptTotal = ReceiptTotal + {CurrentTotal} WHERE ReceiptID = {int.Parse(textBox1.Text)}", conn);
-            cmd.ExecuteNonQuery();
-            refresh();
-            CurrentTotal = 0;
-            label9.Text = $"Total is: {CurrentTotal} LE";
-            clear();
+            try
+            {
+                dataGridView1.Enabled = true;
+                cmd = new SqlCommand(
+                    $"UPDATE Receipts SET ReceiptTotal = ReceiptTotal + {CurrentTotal} WHERE ReceiptID = {int.Parse(textBox1.Text)}",
+                    conn, tr);
+                cmd.ExecuteNonQuery();
+                tr.Commit();
+                refresh();
+                CurrentTotal = 0;
+                label9.Text = $"Total is: {CurrentTotal} LE";
+                clear();
+            }
+            catch
+            {
+
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            cmd = new SqlCommand($"SELECT * FROM Products WHERE ProdCat = {comboBox1.SelectedIndex+1}", conn);
+            cmd = new SqlCommand($"SELECT * FROM Products WHERE ProdCat = {comboBox1.SelectedIndex + 1}", conn);
             cmd.ExecuteNonQuery();
             ds.Tables.Remove("Products");
             da = new SqlDataAdapter(cmd);
             da.Fill(ds, "Products");
-            dataGridView3.DataSource = ds.Tables["Products"]; 
+            dataGridView3.DataSource = ds.Tables["Products"];
             dataGridView3.Refresh();
         }
 
@@ -120,25 +137,33 @@ namespace WindowsFormsApp3
             try
             {
                 dataGridView1.Enabled = false;
+                tr = conn.BeginTransaction();
+
                 if (int.Parse(dataGridView3.Rows[ProdID - 1].Cells[2].Value.ToString()) - int.Parse(textBox3.Text) < 0)
                 {
                     MessageBox.Show("Quantitiy is not suffecient");
                     clear();
                     return;
                 }
-                cmd = new SqlCommand($"INSERT INTO ReceiptDetails VALUES({int.Parse(textBox1.Text)}, {ProdID}, {int.Parse(textBox3.Text)})", conn);
+
+                cmd = new SqlCommand(
+                    $"INSERT INTO ReceiptDetails VALUES({int.Parse(textBox1.Text)}, {ProdID}, {int.Parse(textBox3.Text)})",
+                    conn, tr);
                 cmd.ExecuteNonQuery();
                 ds.Tables.Remove("ReceiptDetails");
-                cmd = new SqlCommand($"SELECT ProdID, Qty FROM ReceiptDetails WHERE ReceiptID = {int.Parse(textBox1.Text)}", conn);
+                cmd = new SqlCommand(
+                    $"SELECT ProdID, Qty FROM ReceiptDetails WHERE ReceiptID = {int.Parse(textBox1.Text)}", conn, tr);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "ReceiptDetails");
                 dataGridView2.DataSource = ds.Tables["ReceiptDetails"];
                 dataGridView2.Refresh();
 
-                cmd = new SqlCommand($"UPDATE Products SET ProdQty = ProdQty - {int.Parse(textBox3.Text)} WHERE ProdID = {ProdID}", conn);
+                cmd = new SqlCommand(
+                    $"UPDATE Products SET ProdQty = ProdQty - {int.Parse(textBox3.Text)} WHERE ProdID = {ProdID}", conn,
+                    tr);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand($"SELECT * FROM Products", conn);
+                cmd = new SqlCommand($"SELECT * FROM Products", conn, tr);
                 ds.Tables.Remove("Products");
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "Products");
@@ -150,23 +175,49 @@ namespace WindowsFormsApp3
 
             }
 
-            CurrentTotal += int.Parse(textBox3.Text) * double.Parse(textBox4.Text);
-            label9.Text = $"Total is: {CurrentTotal.ToString()} LE";
-            clear();
+            try
+            {
+                CurrentTotal += int.Parse(textBox3.Text) * double.Parse(textBox4.Text);
+                label9.Text = $"Total is: {CurrentTotal.ToString()} LE";
+                clear();
+            }
+            catch
+            {
+                MessageBox.Show("Choose Product");
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             textBox1.Text = ReceiptNo.ToString();
-            cmd = new SqlCommand($"INSERT INTO Receipts VALUES({ReceiptNo}, {Form1.SellerID}, CONVERT (DATE, GETDATE()), {0})", conn);
+            cmd = new SqlCommand(
+                $"INSERT INTO Receipts VALUES({ReceiptNo}, {Form1.SellerID}, CONVERT (DATE, GETDATE()), {0})", conn);
             cmd.ExecuteNonQuery();
             refresh();
             ReceiptNo++;
         }
-        
+
         private void button8_Click(object sender, EventArgs e)
         {
             refresh();
+        }
+
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tr.Rollback();
+                clear();
+                CurrentTotal = 0;
+                label9.Text = $"Total is: {CurrentTotal.ToString()} LE";
+                dataGridView1.Enabled = true;
+                refresh();
+            }
+            catch
+            {
+
+            }
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -187,7 +238,7 @@ namespace WindowsFormsApp3
                 dataGridView2.DataSource = ds.Tables["ReceiptDetails"];
                 dataGridView2.Refresh();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
