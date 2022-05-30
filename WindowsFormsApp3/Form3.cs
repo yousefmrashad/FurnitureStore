@@ -106,7 +106,7 @@ namespace WindowsFormsApp3
         {
             try
             {
-                cmd = new SqlCommand($"UPDATE Products SET ProdName = '{textBox2.Text}', ProdQty = {textBox3.Text}, ProdPrice = {textBox4.Text}, ProdCat= {Convert.ToInt32(comboBox1.SelectedItem)} WHERE ProdID = {textBox1.Text}", conn);
+                cmd = new SqlCommand($"UPDATE Products SET ProdName = '{textBox2.Text}', ProdQty = {textBox3.Text}, ProdPrice = {textBox4.Text}, ProdCat= {comboBox1.SelectedIndex + 1} WHERE ProdID = {textBox1.Text}", conn);
                 cmd.ExecuteNonQuery();
                 ds.Clear();
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
@@ -160,7 +160,7 @@ namespace WindowsFormsApp3
             textBox2.Text = selectedRow.Cells[1].Value.ToString();
             textBox3.Text = selectedRow.Cells[2].Value.ToString();
             textBox4.Text = selectedRow.Cells[3].Value.ToString();
-            comboBox1.Text = selectedRow.Cells[4].Value.ToString();
+            comboBox1.Text = comboBox1.Items[int.Parse(selectedRow.Cells[4].Value.ToString()) - 1].ToString();
         }
     }
 }
