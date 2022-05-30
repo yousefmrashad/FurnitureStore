@@ -87,7 +87,7 @@ namespace WindowsFormsApp3
 
         private void button5_Click(object sender, EventArgs e)
         {
-            cmd = new SqlCommand($"Select * FROM Products where ProdCat = {comboBox1.SelectedIndex+1}", conn);
+            cmd = new SqlCommand($"SELECT * FROM Products WHERE ProdCat = {comboBox1.SelectedIndex+1}", conn);
             cmd.ExecuteNonQuery();
             ds.Tables.Remove("Products");
             da = new SqlDataAdapter(cmd);
@@ -110,16 +110,16 @@ namespace WindowsFormsApp3
                 cmd = new SqlCommand($"INSERT INTO ReceiptDetails VALUES({int.Parse(textBox1.Text)}, {ProdID}, {int.Parse(textBox3.Text)})", conn);
                 cmd.ExecuteNonQuery();
                 ds.Tables.Remove("ReceiptDetails");
-                cmd = new SqlCommand($"SELECT ProdID, Qty FROM ReceiptDetails where ReceiptID = {int.Parse(textBox1.Text)}", conn);
+                cmd = new SqlCommand($"SELECT ProdID, Qty FROM ReceiptDetails WHERE ReceiptID = {int.Parse(textBox1.Text)}", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "ReceiptDetails");
                 dataGridView2.DataSource = ds.Tables["ReceiptDetails"];
                 dataGridView2.Refresh();
 
-                cmd = new SqlCommand($"Update Products set ProdQty = ProdQty - {int.Parse(textBox3.Text)} where ProdID = {ProdID}", conn);
+                cmd = new SqlCommand($"UPDATE Products SET ProdQty = ProdQty - {int.Parse(textBox3.Text)} WHERE ProdID = {ProdID}", conn);
                 cmd.ExecuteNonQuery();
-                cmd = new SqlCommand($"Select * FROM Products", conn);
+                cmd = new SqlCommand($"SELECT * FROM Products", conn);
                 ds.Tables.Remove("Products");
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "Products");
@@ -148,7 +148,7 @@ namespace WindowsFormsApp3
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 doc += "Receipt ID: " + dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
-                cmd = new SqlCommand($"Select SellerName from Sellers where SellerID = {int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString())}", conn);
+                cmd = new SqlCommand($"SELECT SellerName FROM Sellers WHERE SellerID = {int.Parse(dataGridView1.SelectedRows[0].Cells[1].Value.ToString())}", conn);
                 dr = cmd.ExecuteReader();
                 while(dr.Read())
                 {
@@ -163,7 +163,7 @@ namespace WindowsFormsApp3
         private void button4_Click(object sender, EventArgs e)
         {
             dataGridView1.Enabled = true;
-            cmd = new SqlCommand($"UPDATE Receipts Set ReceiptTotal = ReceiptTotal + {CurrentTotal} where ReceiptID = {int.Parse(textBox1.Text)}", conn);
+            cmd = new SqlCommand($"UPDATE Receipts SET ReceiptTotal = ReceiptTotal + {CurrentTotal} WHERE ReceiptID = {int.Parse(textBox1.Text)}", conn);
             cmd.ExecuteNonQuery();
             refresh();
             CurrentTotal = 0;
@@ -190,7 +190,7 @@ namespace WindowsFormsApp3
         {
             ds.Clear();
             comboBox1.Items.Clear();
-            cmd = new SqlCommand("Select * from Receipts", conn);
+            cmd = new SqlCommand("SELECT * FROM Receipts", conn);
             da = new SqlDataAdapter(cmd);
             da.Fill(ds, "Receipts");
             dataGridView1.DataSource = ds.Tables["Receipts"];
@@ -230,7 +230,7 @@ namespace WindowsFormsApp3
                 int i;
                 i = int.Parse(selectedRow.Cells[0].Value.ToString());
                 textBox1.Text = i.ToString();
-                cmd = new SqlCommand($"SELECT ProdID, Qty FROM ReceiptDetails where ReceiptID = {i}", conn);
+                cmd = new SqlCommand($"SELECT ProdID, Qty FROM ReceiptDetails WHERE ReceiptID = {i}", conn);
                 cmd.ExecuteNonQuery();
                 ds.Tables.Remove("ReceiptDetails");
                 da = new SqlDataAdapter(cmd);

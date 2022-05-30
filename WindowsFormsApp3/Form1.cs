@@ -63,7 +63,7 @@ namespace WindowsFormsApp3
             {
                 try
                 {
-                    cmd = new SqlCommand($"SELECT * FROM Sellers where SellerName= '{textBox1.Text}' and SellerPassword = '{textBox2.Text}'", conn);
+                    cmd = new SqlCommand($"SELECT * FROM Sellers WHERE SellerName= '{textBox1.Text}' AND SellerPassword = '{textBox2.Text}'", conn);
                     dr = cmd.ExecuteReader();
                     if (dr.HasRows)
                     {
