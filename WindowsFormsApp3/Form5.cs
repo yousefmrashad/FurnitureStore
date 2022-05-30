@@ -110,7 +110,7 @@ namespace WindowsFormsApp3
                 cmd = new SqlCommand($"INSERT INTO ReceiptDetails VALUES({int.Parse(textBox1.Text)}, {ProdID}, {int.Parse(textBox3.Text)})", conn);
                 cmd.ExecuteNonQuery();
                 ds.Tables.Remove("ReceiptDetails");
-                cmd = new SqlCommand($"SELECT ProdID, Qty FROM ReceiptDetails where ReceiptID = {ReceiptNo}", conn);
+                cmd = new SqlCommand($"SELECT ProdID, Qty FROM ReceiptDetails where ReceiptID = {int.Parse(textBox1.Text)}", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "ReceiptDetails");
@@ -248,9 +248,6 @@ namespace WindowsFormsApp3
         private void button8_Click(object sender, EventArgs e)
         {
             refresh();
-
-            ReceiptNo = dataGridView1.Rows.Count;
-            textBox1.Text = ReceiptNo.ToString();
         }
     }
 }
