@@ -278,7 +278,9 @@ namespace WindowsFormsApp3
         {
             ds.Clear();
             comboBox1.Items.Clear();
+
             cmd = new SqlCommand("SELECT * FROM Receipts", conn);
+            cmd.ExecuteNonQuery();
             da = new SqlDataAdapter(cmd);
             da.Fill(ds, "Receipts");
             dataGridView1.DataSource = ds.Tables["Receipts"];
