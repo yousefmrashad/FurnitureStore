@@ -47,6 +47,7 @@ namespace WindowsFormsApp3
 
                 ReceiptNo = dataGridView1.Rows.Count;
                 textBox1.Text = ReceiptNo.ToString();
+                comboBox1.SelectedIndex = 0;
             }
             catch (Exception ex)
             {
@@ -54,6 +55,7 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Logout Button
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -63,11 +65,13 @@ namespace WindowsFormsApp3
             form1.Location = this.Location;
         }
 
+        //Exit Button
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        //Print Button
         private void button3_Click(object sender, EventArgs e)
         {
             printPreviewDialog1.Document = printDocument1;
@@ -105,14 +109,15 @@ namespace WindowsFormsApp3
             }
         }
 
-    private void button4_Click(object sender, EventArgs e)
+        //Submit Button
+        private void button4_Click(object sender, EventArgs e)
         {
             try
             {
                 dataGridView1.Enabled = true;
                 cmd = new SqlCommand(
-                    $"UPDATE Receipts SET ReceiptTotal = ReceiptTotal + {CurrentTotal} WHERE ReceiptID = {int.Parse(textBox1.Text)}",
-                    conn);
+                $"UPDATE Receipts SET ReceiptTotal = ReceiptTotal + {CurrentTotal} WHERE ReceiptID = {int.Parse(textBox1.Text)}",
+                conn);
                 cmd.ExecuteNonQuery();
                 refresh();
                 CurrentTotal = 0;
@@ -125,25 +130,40 @@ namespace WindowsFormsApp3
             }
         }
 
-    private void button5_Click(object sender, EventArgs e)
-    {
-        try
+        //Refresh Button
+        private void button5_Click(object sender, EventArgs e)
         {
-            cmd = new SqlCommand($"SELECT * FROM Products WHERE ProdCat = {comboBox1.SelectedIndex + 1}", conn);
-            cmd.ExecuteNonQuery();
-            ds.Tables.Remove("Products");
-            da = new SqlDataAdapter(cmd);
-            da.Fill(ds, "Products");
-            dataGridView3.DataSource = ds.Tables["Products"];
-            dataGridView3.Refresh();
-        }
-        catch
-        {
+            try
+            {
+                if (comboBox1.SelectedIndex >= 0)
+                {
+                    cmd = new SqlCommand($"SELECT * FROM Products WHERE ProdCat = {comboBox1.SelectedIndex + 1}", conn);
+                    cmd.ExecuteNonQuery();
+                    ds.Tables.Remove("Products");
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(ds, "Products");
+                    dataGridView3.DataSource = ds.Tables["Products"];
+                    dataGridView3.Refresh();
+                }
+                else
+                {
+                    cmd = new SqlCommand($"SELECT * FROM Products", conn);
+                    cmd.ExecuteNonQuery();
+                    ds.Tables.Remove("Products");
+                    da = new SqlDataAdapter(cmd);
+                    da.Fill(ds, "Products");
+                    dataGridView3.DataSource = ds.Tables["Products"];
+                    dataGridView3.Refresh();
+                }
+            }
+            catch
+            {
 
+            }
         }
-    }
 
-    private void button6_Click(object sender, EventArgs e)
+        //Add Button
+        private void button6_Click(object sender, EventArgs e)
         {
             try
             {
@@ -178,47 +198,43 @@ namespace WindowsFormsApp3
                 da.Fill(ds, "Products");
                 dataGridView3.DataSource = ds.Tables["Products"];
                 dataGridView3.Refresh();
-            }
-            catch
-            {
-
-            }
-
-            try
-            {
                 CurrentTotal += int.Parse(textBox3.Text) * double.Parse(textBox4.Text);
                 label9.Text = $"Total is: {CurrentTotal.ToString()} LE";
                 clear();
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("Choose Product");
             }
         }
 
-    private void button7_Click(object sender, EventArgs e)
-    {
-        try
+        //New Receipt Button
+        private void button7_Click(object sender, EventArgs e)
         {
-            textBox1.Text = ReceiptNo.ToString();
-            cmd = new SqlCommand(
-                $"INSERT INTO Receipts VALUES({ReceiptNo}, {Form1.SellerID}, CONVERT (DATE, GETDATE()), {0})", conn);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                textBox1.Text = ReceiptNo.ToString();
+                cmd = new SqlCommand(
+                    $"INSERT INTO Receipts VALUES({ReceiptNo}, {Form1.SellerID}, CONVERT (DATE, GETDATE()), {0})", conn);
+                cmd.ExecuteNonQuery();
+                refresh();
+                ReceiptNo++;
+            }
+            catch
+            {
+
+            }
+        }
+
+        //Reload Button
+        private void button8_Click(object sender, EventArgs e)
+        {
             refresh();
-            ReceiptNo++;
-        }
-        catch
-        {
-
-        }
-    }
-
-    private void button8_Click(object sender, EventArgs e)
-        {
-            refresh();
         }
 
-    private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        // Receipts GridView
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -242,6 +258,7 @@ namespace WindowsFormsApp3
             }
         }
 
+        // Products GridView
         private void dataGridView3_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try

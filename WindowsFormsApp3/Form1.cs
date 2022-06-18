@@ -38,6 +38,8 @@ namespace WindowsFormsApp3
             }
             comboBox1.SelectedIndex = 0;
         }
+
+        //Login Button
         private void button1_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem.ToString() == "Admin")

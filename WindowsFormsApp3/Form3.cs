@@ -49,6 +49,8 @@ namespace WindowsFormsApp3
                 MessageBox.Show(ex.Message);
             }
         }
+
+        //Categories Button
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             this.Hide();
@@ -57,6 +59,8 @@ namespace WindowsFormsApp3
             form4.StartPosition = FormStartPosition.Manual;         
             form4.Location = this.Location;
         }
+
+        //Sellers Button
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             this.Hide();
@@ -66,6 +70,7 @@ namespace WindowsFormsApp3
             form2.Location = this.Location;
         }
 
+        //Logout Button
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -75,24 +80,19 @@ namespace WindowsFormsApp3
             form1.Location = this.Location;
         }
 
+        //Exit Button
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        //Add Button
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"INSERT INTO Products VALUES({textBox1.Text},'{textBox2.Text}',{textBox3.Text},{textBox4.Text}, {comboBox1.SelectedIndex+1})", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Products", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Products");
-                dataGridView1.DataSource = ds.Tables["Products"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -101,19 +101,13 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Edit Button
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"UPDATE Products SET ProdName = '{textBox2.Text}', ProdQty = {textBox3.Text}, ProdPrice = {textBox4.Text}, ProdCat= {comboBox1.SelectedIndex + 1} WHERE ProdID = {textBox1.Text}", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Products", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Products");
-                dataGridView1.DataSource = ds.Tables["Products"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -122,19 +116,13 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Delete Button
         private void button5_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"DELETE FROM Products WHERE ProdID = {textBox1.Text}", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Products", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Products");
-                dataGridView1.DataSource = ds.Tables["Products"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -167,6 +155,17 @@ namespace WindowsFormsApp3
             {
 
             }
+        }
+        void dml(SqlCommand cmd)
+        {
+            cmd.ExecuteNonQuery();
+            ds.Clear();
+            cmd = new SqlCommand("SELECT * FROM Products", conn);
+            cmd.ExecuteNonQuery();
+            da = new SqlDataAdapter(cmd);
+            da.Fill(ds, "Products");
+            dataGridView1.DataSource = ds.Tables["Products"];
+            dataGridView1.Refresh();
         }
     }
 }

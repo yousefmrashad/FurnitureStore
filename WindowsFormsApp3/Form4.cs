@@ -44,6 +44,7 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Products Button
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             this.Hide();
@@ -51,7 +52,9 @@ namespace WindowsFormsApp3
             form3.Show();
             form3.StartPosition = FormStartPosition.Manual;         
             form3.Location = this.Location;
-        }       
+        }
+
+        //Sellers Button
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             this.Hide();
@@ -61,6 +64,7 @@ namespace WindowsFormsApp3
             form2.Location = this.Location;
         }
 
+        //Logout Button
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -70,23 +74,19 @@ namespace WindowsFormsApp3
             form1.Location = this.Location;
         }
 
+        //Exit Button
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+        //Add Button
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"INSERT INTO Categories VALUES({textBox1.Text},'{textBox2.Text}','{textBox3.Text}')", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Categories", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Categories");
-                dataGridView1.DataSource = ds.Tables["Categories"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -95,19 +95,13 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Edit Button
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"UPDATE Categories SET CatName = '{textBox2.Text}', CatDesc = '{textBox3.Text}' WHERE CatID = {textBox1.Text}", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Categories", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Categories");
-                dataGridView1.DataSource = ds.Tables["Categories"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -116,19 +110,13 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Delete Button
         private void button5_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"DELETE FROM Categories WHERE CatID = {textBox1.Text}", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Categories", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Categories");
-                dataGridView1.DataSource = ds.Tables["Categories"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -157,6 +145,17 @@ namespace WindowsFormsApp3
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
+        }
+        void dml(SqlCommand cmd)
+        {
+            cmd.ExecuteNonQuery();
+            ds.Clear();
+            cmd = new SqlCommand("SELECT * FROM Categories", conn);
+            cmd.ExecuteNonQuery();
+            da = new SqlDataAdapter(cmd);
+            da.Fill(ds, "Categories");
+            dataGridView1.DataSource = ds.Tables["Categories"];
+            dataGridView1.Refresh();
         }
     }
 }

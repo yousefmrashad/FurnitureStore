@@ -43,6 +43,7 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Logout Button
         private void button1_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -52,11 +53,13 @@ namespace WindowsFormsApp3
             form1.Location = this.Location;
         }
 
+        //Exit Button
         private void button2_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        //Products Button
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
             this.Hide();
@@ -66,6 +69,7 @@ namespace WindowsFormsApp3
             form3.Location = this.Location;
         }
 
+        //Categories Button
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             this.Hide();
@@ -76,20 +80,13 @@ namespace WindowsFormsApp3
         }
 
 
-
+        //Add Button
         private void button3_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"INSERT INTO Sellers VALUES({textBox1.Text},'{textBox2.Text}',{textBox3.Text},{textBox4.Text},'{textBox5.Text}')", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Sellers", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Sellers");
-                dataGridView1.DataSource = ds.Tables["Sellers"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -98,19 +95,13 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Edit Button
         private void button4_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"UPDATE Sellers SET SellerName = '{textBox2.Text}', SellerAge = {textBox3.Text}, SellerPhone = {textBox4.Text}, SellerPassword = '{textBox5.Text}' WHERE SellerID = {textBox1.Text}", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Sellers", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Sellers");
-                dataGridView1.DataSource = ds.Tables["Sellers"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -119,19 +110,13 @@ namespace WindowsFormsApp3
             }
         }
 
+        //Delete Button
         private void button5_Click(object sender, EventArgs e)
         {
             try
             {
                 cmd = new SqlCommand($"DELETE FROM Sellers WHERE SellerID = {textBox1.Text}", conn);
-                cmd.ExecuteNonQuery();
-                ds.Clear();
-                cmd = new SqlCommand("SELECT * FROM Sellers", conn);
-                cmd.ExecuteNonQuery();
-                da = new SqlDataAdapter(cmd);
-                da.Fill(ds, "Sellers");
-                dataGridView1.DataSource = ds.Tables["Sellers"];
-                dataGridView1.Refresh();
+                dml(cmd);
                 clear();
             }
             catch (Exception ex)
@@ -165,6 +150,18 @@ namespace WindowsFormsApp3
             textBox3.Clear();
             textBox4.Clear();
             textBox5.Clear();
+        }
+
+        void dml(SqlCommand cmd)
+        {
+            cmd.ExecuteNonQuery();
+            ds.Clear();
+            cmd = new SqlCommand("SELECT * FROM Sellers", conn);
+            cmd.ExecuteNonQuery();
+            da = new SqlDataAdapter(cmd);
+            da.Fill(ds, "Sellers");
+            dataGridView1.DataSource = ds.Tables["Sellers"];
+            dataGridView1.Refresh();
         }
     }
 }
