@@ -30,7 +30,7 @@ namespace WindowsFormsApp3
                 string sql = "Data Source= LAPTOP-7GNK1L4T\\SQLEXPRESS; Initial Catalog = DB1; Integrated Security=true";
                 conn = new SqlConnection(sql);
                 conn.Open();
-                cmd = new SqlCommand("SELECT * FROM Sellers", conn);
+                cmd = new SqlCommand("SELECT * FROM SELLERS", conn);
                 cmd.ExecuteNonQuery();
                 da = new SqlDataAdapter(cmd);
                 da.Fill(ds, "Sellers");
