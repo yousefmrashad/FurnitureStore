@@ -26,7 +26,7 @@ namespace WindowsFormsApp3
             checkBox2.ForeColor = Color.White;
             try
             {
-                string sql = "Data Source= LAPTOP-7GNK1L4T\\SQLEXPRESS; Initial Catalog=DB1; Integrated Security=true";
+                string sql = "Data Source= Yousef-Laptop\\SQLEXPRESS; Initial Catalog=DB1; Integrated Security=true";
                 conn = new SqlConnection(sql);
                 conn.Open();
                 cmd = new SqlCommand("SELECT * FROM Products", conn);
